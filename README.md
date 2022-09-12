@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ---
 
-# OBSERVABLE REQUEST
+# <a name="observable"></a> OBSERVABLE REQUEST
 
 Angular lavora molto bene con gli Observable (Oggetti in continuo mutamento). Gli Observable possono prendere il posto dei gestori di eventi (Event Handlers), infatti poichè un observable fornisce più valori duarante la sua esecuzione può essere usato dove andrestia costruire operatori su array (find, filter, sort...).
 

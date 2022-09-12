@@ -14,6 +14,8 @@ export class AppComponent {
 
   @ViewChild('selection') inputChild!: ElementRef;
 
+  @ViewChild('codeObs') codeObs!: any;
+
   obsCode = "//Code example\n\n" +
     "  public mapLoader:  Observable<number>;\n" +
     "\n" +
@@ -41,6 +43,7 @@ export class AppComponent {
     "      this.timerSub.unsubscribe()\n" +
     "      return;\n" +
     "    }\n" +
+    "    //start to execute\n" +
     "    this.timerSub = this.mapLoader.subscribe(value => {})\n" +
     "  }"
 
@@ -52,6 +55,8 @@ export class AppComponent {
       this.randomNumber = Math.random().toString(36)
       console.log(value)
     }));
+
+
   }
 
   ngOnInit(): void {
@@ -64,6 +69,9 @@ export class AppComponent {
       this.timerSub.unsubscribe()
       return;
     }
-    this.timerSub = this.mapLoader.subscribe(value => {})
+    this.timerSub = this.mapLoader.subscribe(value => {
+    })
+
+
   }
 }

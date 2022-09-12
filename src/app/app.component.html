@@ -54,6 +54,13 @@
     </button>
   </div>
 
+  <div [ngSwitch]="selection.value">
+    <pre *ngSwitchDefault>No code found</pre>
+    <pre *ngSwitchCase="'observable'">
+
+    </pre>
+  </div>
+
   <!-- Terminal -->
   <div class="terminal" [ngSwitch]="selection.value">
     <pre *ngSwitchDefault>No code found</pre>
