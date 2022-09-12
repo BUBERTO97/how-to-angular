@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Observable, Subscription, tap, timer} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'how-to-angular';
+  title = 'HowToAngular';
+
+  constructor() {
+
+
+  }
+
+  ngOnInit(): void {
+
+  }
 }

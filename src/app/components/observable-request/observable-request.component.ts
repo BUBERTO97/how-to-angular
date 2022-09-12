@@ -1,5 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subscription, tap, timer} from 'rxjs';
+import {HighlightLoader} from "ngx-highlightjs";
+
+const themeAndroidStudio: string = 'node_modules/highlight.js/scss/github.scss';
 
 @Component({
   selector: 'app-observable-request',
@@ -53,7 +56,8 @@ export class ObservableRequestComponent implements OnInit {
 
   timerSub!: Subscription;
 
-  constructor() {
+  constructor(private hljsLoader: HighlightLoader) {
+    this.hljsLoader.setTheme(themeAndroidStudio);
     this.mapLoader = timer(0, 500).pipe(tap(value => {
       this.randomNumber = Math.random().toString(36)
       console.log(value)
