@@ -1,24 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable, Subscription, timer} from 'rxjs';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Observable, Subscription, tap, timer} from 'rxjs';
 
 @Component({
   selector: 'app-observable-request',
   templateUrl: './observable-request.component.html',
-  styleUrls: ['./observable-request.component.css']
+  styleUrls: ['./observable-request.component.scss']
 })
 export class ObservableRequestComponent implements OnInit {
 
   public mapLoader:  Observable<number>;
 
-  public rundomNumber: String | string = '';
+  public randomNumber: String | string = '';
+
+  public buttonString = 'Play';
+
+  @ViewChild('selection') inputChild!: ElementRef;
+
+  @ViewChild('codeObs') codeObs!: any;
+
+  obsCode = `//Code example
+    public mapLoader:  Observable<number>;
+
+    public randomNumber: String | string = '';
+
+    @ViewChild('selection') inputChild!: ElementRef;
+
+
+    timerSub!: Subscription;
+
+    constructor() {
+      this.mapLoader = timer(0, 500).pipe(tap(value => {
+        this.randomNumber = Math.random().toString(36)
+        console.log(value)
+      }));
+    }
+
+    ngOnInit(): void {
+
+    }
+
+    onSubClick() {
+      this.inputChild.nativeElement.value = 'observable'
+      if(!!this.timerSub && !this.timerSub.closed){
+        this.timerSub.unsubscribe()
+        return;
+      }
+      //start to execute
+      this.timerSub = this.mapLoader.subscribe(value => {})
+    }`
+
+
+
+  timerSub!: Subscription;
 
   constructor() {
-    this.mapLoader = timer(0, 130);
+    this.mapLoader = timer(0, 500).pipe(tap(value => {
+      this.randomNumber = Math.random().toString(36)
+      console.log(value)
+    }));
+
+
   }
 
   ngOnInit(): void {
-    this.mapLoader.subscribe(value => {
-      this.rundomNumber = Math.random().toString(36).slice(value)
+
+  }
+
+  onSubClick() {
+    if(!!this.timerSub && !this.timerSub.closed){
+      this.timerSub.unsubscribe();
+      this.buttonString = 'Play';
+      return;
+    }
+    this.buttonString = 'Pause';
+    this.timerSub = this.mapLoader.subscribe(value => {
     })
+
+
   }
 }
