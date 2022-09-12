@@ -55,15 +55,17 @@
   </div>
 
   <div [ngSwitch]="selection.value">
-    <pre *ngSwitchDefault>No code found</pre>
+    <pre *ngSwitchDefault></pre>
     <pre *ngSwitchCase="'observable'">
-
+      <a href="https://github.com/BUBERTO97/how-to-angular#-observable-request" tabindex="0">
+        <span>Observable GUIDE</span>
+      </a>
     </pre>
   </div>
 
   <!-- Terminal -->
   <div class="terminal" [ngSwitch]="selection.value">
-    <pre *ngSwitchDefault>No code found</pre>
+    <pre *ngSwitchDefault></pre>
     <pre *ngSwitchCase="'observable'">
         <code [highlight]="obsCode" [languages]="['typescript']" [lineNumbers]="true"></code>
     </pre>
