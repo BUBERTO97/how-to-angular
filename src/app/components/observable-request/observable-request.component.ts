@@ -10,16 +10,15 @@ export class ObservableRequestComponent implements OnInit {
 
   public mapLoader:  Observable<number>;
 
+  public rundomNumber: String | string = '';
+
   constructor() {
     this.mapLoader = timer(0, 130);
   }
 
   ngOnInit(): void {
-
+    this.mapLoader.subscribe(value => {
+      this.rundomNumber = Math.random().toString(36).slice(value)
+    })
   }
-
-
-
-
-
 }
