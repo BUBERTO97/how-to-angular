@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable, Subscription, timer} from 'rxjs';
 
 @Component({
   selector: 'app-observable-request',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObservableRequestComponent implements OnInit {
 
-  constructor() { }
+  public mapLoader:  Observable<number>;
+
+  constructor() {
+    this.mapLoader = timer(0, 130);
+  }
 
   ngOnInit(): void {
+
   }
+
+
+
+
 
 }
