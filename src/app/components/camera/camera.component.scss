@@ -1,0 +1,22 @@
+.actionBtn {
+  font-size: 4em;
+  cursor: pointer;
+}
+.snapshot{
+  text-align: center;
+  img{
+    max-width: 800px;
+    max-height: 800px;
+  }
+}
+ul.links{
+  padding-bottom: 20px;
+}
+
+.row{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

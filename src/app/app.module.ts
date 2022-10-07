@@ -11,6 +11,14 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from "ngx-highligh
 import { TestComponentComponent } from './test-component/test-component.component';
 import {ObservableRequestComponent} from "./components/observable-request/observable-request.component";
 import {PromiseRequestComponent} from "./components/promise-request/promise-request.component";
+import { ScannerComponent } from './components/scanner/scanner.component';
+import {BarcodeScannerLivestreamModule} from "ngx-barcode-scanner";
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { CameraComponent } from './components/camera/camera.component';
+
+import {WebcamModule} from 'ngx-webcam';
+import {FormsModule} from "@angular/forms";
 
 // @ts-ignore
 // @ts-ignore
@@ -20,7 +28,10 @@ import {PromiseRequestComponent} from "./components/promise-request/promise-requ
     AppComponent,
     TestComponentComponent,
     ObservableRequestComponent,
-    PromiseRequestComponent
+    PromiseRequestComponent,
+    ScannerComponent,
+    QrCodeComponent,
+    CameraComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +43,11 @@ import {PromiseRequestComponent} from "./components/promise-request/promise-requ
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    HighlightModule
+    HighlightModule,
+    BarcodeScannerLivestreamModule,
+    ZXingScannerModule,
+    WebcamModule,
+    FormsModule
   ],
   providers: [
     {
