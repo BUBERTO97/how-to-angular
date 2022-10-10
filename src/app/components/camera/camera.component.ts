@@ -20,7 +20,7 @@ export class CameraComponent implements OnInit {
   public errors: WebcamInitError[] = [];
 
   // latest snapshot
-  public webcamImage: WebcamImage | null = null;
+  public webcamImage: Array<WebcamImage> | null = null;
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -55,7 +55,10 @@ export class CameraComponent implements OnInit {
 
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage);
-    this.webcamImage = webcamImage;
+    if(!!this.webcamImage)
+      this.webcamImage?.push(webcamImage)
+    else
+      this.webcamImage = new Array<WebcamImage>(webcamImage)
   }
 
   public cameraWasSwitched(deviceId: string): void {
@@ -71,4 +74,7 @@ export class CameraComponent implements OnInit {
     return this.nextWebcam.asObservable();
   }
 
+  deleteImage(i: number) {
+    this.webcamImage?.splice(i, 1)
+  }
 }
