@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WebcamImage, WebcamInitError, WebcamUtil} from "ngx-webcam";
 import {Observable, Subject} from "rxjs";
+import * as imageConversion from 'image-conversion';
 
 @Component({
   selector: 'app-camera',
@@ -26,6 +27,7 @@ export class CameraComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
+  public uploadFile: Boolean = false;
 
   public ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs()
@@ -76,5 +78,69 @@ export class CameraComponent implements OnInit {
 
   deleteImage(i: number) {
     this.webcamImage?.splice(i, 1)
+  }
+
+  uploadPhoto() {
+    this.uploadFile = !this.uploadFile;
+  }
+
+  /**
+   * on file drop handler
+   */
+  onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+
+  /**
+   * handle file from browsing
+   */
+  fileBrowseHandler(files) {
+    this.prepareFilesList(files.files);
+  }
+
+  /**
+   * Delete file from files list
+   * @param index (File index)
+   */
+  deleteFile(index: number) {
+    //this.files.splice(index, 1);
+  }
+  /**
+   * Convert Files list to normal array list
+   * @param files (Files List)
+   */
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      item.progress = 0;
+      let file: File = item;
+
+      if(!!file.type && file.type.startsWith("image"))
+        imageConversion.filetoDataURL(file).then(dataUrl => imageConversion.dataURLtoImage(dataUrl).then(image => {
+          imageConversion.imagetoCanvas(image).then(canvas => {
+            let context = canvas.getContext('2d');
+            // @ts-ignore
+            let myData = context.getImageData(0, 0, image.width, image.height);
+            this.handleImage(new WebcamImage(dataUrl, file.type, myData))
+          })
+        }))
+
+
+    }
+  }
+
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }

@@ -19,6 +19,7 @@ import { CameraComponent } from './components/camera/camera.component';
 
 import {WebcamModule} from 'ngx-webcam';
 import {FormsModule} from "@angular/forms";
+import { DndDirective } from './components/camera/dnd.directive';
 
 // @ts-ignore
 // @ts-ignore
@@ -31,7 +32,8 @@ import {FormsModule} from "@angular/forms";
     PromiseRequestComponent,
     ScannerComponent,
     QrCodeComponent,
-    CameraComponent
+    CameraComponent,
+    DndDirective
   ],
   imports: [
     BrowserModule,
