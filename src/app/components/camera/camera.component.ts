@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {WebcamImage, WebcamInitError, WebcamUtil} from "ngx-webcam";
 import {Observable, Subject} from "rxjs";
 import * as imageConversion from 'image-conversion';
@@ -9,6 +9,7 @@ import * as imageConversion from 'image-conversion';
   styleUrls: ['./camera.component.scss']
 })
 export class CameraComponent implements OnInit {
+
 
   public showWebcam = true;
   public allowCameraSwitch = true;
@@ -22,6 +23,7 @@ export class CameraComponent implements OnInit {
 
   // latest snapshot
   public webcamImage: Array<WebcamImage> | null = null;
+  public isImageSelected: Map<Number, Boolean> = new Map<Number, Boolean>()
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -61,6 +63,9 @@ export class CameraComponent implements OnInit {
       this.webcamImage?.push(webcamImage)
     else
       this.webcamImage = new Array<WebcamImage>(webcamImage)
+
+    this.isImageSelected.set(this.webcamImage.length - 1, false);
+    console.log(this.isImageSelected)
   }
 
   public cameraWasSwitched(deviceId: string): void {
@@ -143,4 +148,11 @@ export class CameraComponent implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
+
+  chengeSelectOf(key: Number){
+    this.isImageSelected.set(key, !this.isImageSelected.get(key));
+  }
+
+
+
 }

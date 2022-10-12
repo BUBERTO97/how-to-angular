@@ -1,34 +1,66 @@
+@use "@material/image-list/mdc-image-list";
+@use "@material/image-list";
+
+.my-image-list {
+  @include image-list.standard-columns(5);
+  max-height: 300px;
+  overflow-y: auto;
+  max-width: 600px;
+}
+
+@media (max-width: 599px) {
+  .my-image-list {
+    @include image-list.standard-columns(3);
+  }
+}
+
+@media (max-width: 400px) {
+  .my-image-list {
+    @include image-list.standard-columns(2);
+    max-width: 200px;
+  }
+}
+
+.delete{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 999;
+}
+
+.select{
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 999;
+}
+
 .actionBtn {
   font-size: 4em;
   cursor: pointer;
   width: fit-content;
 }
-.snapshot{
-  text-align: center;
+
+.scrolling-wrapper-flexbox {
   display: flex;
-  flex-direction: row;
-  width: 800px;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: space-around;
-  .img{
-    position: relative;
-    text-align: center;
-    max-width: 400px;
-    max-height: 400px;
-    margin: 16px;
-    img{
-      max-width: 400px;
-      max-height: 400px;
-    }
-    .delete{
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      z-index: 999;
-    }
+  overflow-y: hidden;
+  height: 500px;
+
+  .card {
+    flex: 0 0 auto;
   }
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollable-img{
+  flex: 1 1 auto;
+  max-height: 400px;
+  max-width: 400px;
 }
 
 ul.links{

@@ -11,47 +11,16 @@
 </div>
 
 <div class="content" role="main">
-
   <!-- Next Steps -->
-  <h2>Barcode, Qrcode and Camera</h2>
-  <p>View angular in action</p>
+  <ng-container [ngSwitch]="selection.value">
+    <h1  *ngSwitchDefault>Example of Barcode</h1>
+    <h1 *ngSwitchCase="'qrcode'">Example of Qrcode</h1>
+    <h1 *ngSwitchCase="'camera'">Example of Camera</h1>
+  </ng-container>
 
   <input type="hidden" #selection>
 
   <div class="card-container">
-    <!--<button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>New Component</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="1">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Angular Material</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="2">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add PWA Support</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="3">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add Dependency</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'test'" tabindex="4">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Run and Watch Tests</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'build'" tabindex="5">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Build for Production</span>
-    </button>
-    <button class="card card-small" (click)="selection.value = 'observable'" tabindex="6">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Observable</span>
-    </button>-->
     <button class="card card-small" (click)="selection.value = 'scanner'" tabindex="0">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-upc-scan" viewBox="0 0 16 16">
         <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
@@ -76,13 +45,6 @@
   </div>
 
   <div class="terminal-contianer" [ngSwitch]="selection.value">
-    <!--<div class="terminal" *ngSwitchDefault><pre class="pre" *ngSwitchDefault>ng generate component xyz</pre></div>
-    <div class="terminal" *ngSwitchCase="'material'"><pre class="pre" >ng add @angular/material</pre></div>
-    <div class="terminal" *ngSwitchCase="'pwa'"><pre class="pre" >ng add @angular/pwa</pre></div>
-    <div class="terminal" *ngSwitchCase="'dependency'"><pre class="pre" >ng add _____</pre></div>
-    <div class="terminal" *ngSwitchCase="'test'"><pre class="pre" >ng test</pre></div>
-    <div class="terminal" *ngSwitchCase="'build'"><pre class="pre" >ng build</pre></div>
-    <app-observable-request *ngSwitchCase="'observable'"></app-observable-request>-->
     <app-scanner *ngSwitchDefault></app-scanner>
     <app-qr-code *ngSwitchCase="'qrcode'"></app-qr-code>
     <app-camera *ngSwitchCase="'camera'"></app-camera>
