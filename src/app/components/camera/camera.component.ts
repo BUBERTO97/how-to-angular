@@ -83,6 +83,7 @@ export class CameraComponent implements OnInit {
 
   deleteImage(i: number) {
     this.webcamImage?.splice(i, 1)
+    this.isImageSelected.delete(i)
   }
 
   uploadPhoto() {
